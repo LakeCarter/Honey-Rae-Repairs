@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react"
-import {
-  getAllEmployees,
-  getEmployeeById,
-} from "../../services/employeeService.jsx"
+import { getEmployeeById } from "../../services/employeeService.js"
 import { use } from "react"
 
 export const Ticket = ({ ticket }) => {
@@ -11,8 +8,8 @@ export const Ticket = ({ ticket }) => {
   useEffect(() => {
     if (ticket.employeeTickets.length) {
       getEmployeeById(ticket.employeeTickets[0].employeeId).then((employee) => {
-        setAssignedEmployee(employee)},
-      )
+        setAssignedEmployee(employee)
+      })
     }
   }, [ticket])
 
