@@ -6,6 +6,7 @@ import { Routes, Route, Outlet } from "react-router-dom"
 import { NavBar } from "./components/nav/NavBar.jsx"
 import { Welcome } from "./components/welcome/Welcome.jsx"
 import { CustomerDetails } from "./components/customers/CustomerDetails.jsx"
+import { EmployeeDetails } from "./components/Employees/EmployeesDetails.jsx"
 
 export const App = () => {
   return (
@@ -21,7 +22,10 @@ export const App = () => {
       >
         <Route index element={<Welcome/>} />
         <Route path="tickets" element={<TicketList />} />
-        <Route path="employees" element={<EmployeesList />} />
+        <Route path="employees">
+           <Route index element={<EmployeesList />} />
+           <Route path=":employeeId" element={<EmployeeDetails/>} />
+        </Route>
         <Route path="customers">
           <Route index element={<CustomerList/>} />
           <Route path=":customerId" element={<CustomerDetails/>} /> 
