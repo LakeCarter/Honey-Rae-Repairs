@@ -21,7 +21,7 @@ export const EmployeeDetails = () => {
     }, [employee])
 
     return<div>
-        <section className="employee">
+        <section className="employee" key={employee.id}>
             <header className="employee-header">{employee.user?.fullName}</header>
             <div>
                 <span className="employee-info">Email: </span>
