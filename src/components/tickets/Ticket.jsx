@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react"
-import { getEmployeeById, getAllEmployees } from "../../services/employeeService.js"
+import {
+  getEmployeeById,
+  getAllEmployees,
+} from "../../services/employeeService.js"
 import { assignTicket, updateTicket } from "../../services/ticketService.js"
 
-export const Ticket = ({ ticket, currentUser, getAndSetTickets}) => {
+export const Ticket = ({ ticket, currentUser, getAndSetTickets }) => {
   const [assignedEmployee, setAssignedEmployee] = useState("")
-  const [allEmployees,setAllEmployees] = useState([])
+  const [allEmployees, setAllEmployees] = useState([])
 
   useEffect(() => {
     if (ticket.employeeTickets.length) {
@@ -12,23 +15,25 @@ export const Ticket = ({ ticket, currentUser, getAndSetTickets}) => {
         setAssignedEmployee(employee)
       })
     }
-    getAllEmployees().then(employeeArray => setAllEmployees(employeeArray))
+    getAllEmployees().then((employeeArray) => setAllEmployees(employeeArray))
   }, [ticket])
 
-  const handleClaim = () =>{
-    const currentEmployee = allEmployees.find(employee => employee.userId === currentUser.id)
+  const handleClaim = () => {
+    const currentEmployee = allEmployees.find(
+      (employee) => employee.userId === currentUser.id,
+    )
 
     const newEmployeeTicket = {
       employeeId: currentEmployee.id,
       serviceTicketId: ticket.id,
     }
 
-    assignTicket(newEmployeeTicket).then(()=>{
+    assignTicket(newEmployeeTicket).then(() => {
       getAndSetTickets()
     })
   }
 
-  const handleClose = () =>{
+  const handleClose = () => {
     const closedTicket = {
       id: ticket.id,
       userId: ticket.userId,
@@ -37,7 +42,7 @@ export const Ticket = ({ ticket, currentUser, getAndSetTickets}) => {
       dateCompleted: new Date(),
     }
 
-    updateTicket(closedTicket).then(()=>{
+    updateTicket(closedTicket).then(() => {
       getAndSetTickets()
     })
   }
@@ -70,7 +75,9 @@ export const Ticket = ({ ticket, currentUser, getAndSetTickets}) => {
           {/*If the logged in user is an employee and the ticket is assigned to an employee and does not have a close date, then a button to close the ticket should appear*/}
           {assignedEmployee?.userId === currentUser.id &&
           !ticket.dateCompleted ? (
-            <button className="btn btn-warning" onClick={handleClose}>Close</button>
+            <button className="btn btn-warning" onClick={handleClose}>
+              Close
+            </button>
           ) : (
             ""
           )}
