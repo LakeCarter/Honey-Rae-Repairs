@@ -1,4 +1,4 @@
-import { Ticket } from "../components/tickets/Ticket.jsx"
+import { Ticket } from "../components/Tickets/Ticket.jsx"
 
 export const getAllTickets = () => {
   return fetch(
@@ -22,13 +22,28 @@ export const assignTicket = (employeeTicket) => {
   })
 }
 
+export const updateTicket = (ticket) => {
+  return fetch(`http://localhost:8088/serviceTickets/${ticket.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(ticket),
+  })
+}
 
-export const updateTicket = (ticket) =>{
-    return fetch(`http://localhost:8088/serviceTickets/${ticket.id}`,{
-        method:"PUT",
-        headers:{
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(ticket)
-    })
+export const deleteTicket = (ticket) => {
+  return fetch(`http://localhost:8088/serviceTickets/${ticket.id}`, {
+    method: "delete",
+  })
+}
+
+export const createTicket = (ticket) => {
+  return fetch(`http://localhost:8088/serviceTickets`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body:JSON.stringify(ticket),
+  })
 }

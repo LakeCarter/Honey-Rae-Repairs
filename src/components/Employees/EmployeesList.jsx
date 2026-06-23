@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getStaffUsers } from "../../services/userService.js"
-import { User } from "../users/User.jsx"
+import { User } from "../Users/User.jsx"
 import "./Employees.css"
 import { Link } from "react-router-dom"
 
@@ -16,7 +16,7 @@ export const EmployeesList = () => {
       {allEmployees.map((employee) => {
         return (
           <Link to={`/employees/${employee.id}`} key={employee.id}>
-            <User user={employee}/>
+            <User user={employee} />
           </Link>
         )
       })}
